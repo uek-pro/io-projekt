@@ -1,0 +1,9 @@
+{
+  "name": "io-projekt",
+  "description": "",
+  "autoload": {
+    "psr-4": {
+      "IOProject\\": "src/IOProject"
+    }
+  }
+}

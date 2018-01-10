@@ -52,4 +52,40 @@ class SQLiteConnection implements IConnection {
         $this->pdo->exec("DROP TABLE users");
         $this->pdo->exec("DROP TABLE employees");
     }
+
+    public function checkLogonData($login, $pass) {
+        $query = $this->pdo->prepare(
+            'SELECT login, pass FROM users WHERE login = :login AND pass = :pass LIMIT 1'
+        );
+        $query->bindValue(':login', $login, PDO::PARAM_STR);
+        $query->bindValue(':pass', $pass, PDO::PARAM_STR);
+        $query->execute();
+        if ($row = $query->fetch(PDO::FETCH_ASSOC))
+            return $row;
+        return false;
+    }
+
+    public function isUserExists($login) {
+        $query = $this->pdo->prepare(
+            'SELECT user_id FROM users WHERE login = :login LIMIT 1'
+        );
+        $query->bindValue(':login', $login, PDO::PARAM_STR);
+        $query->execute();
+        if ($row = $query->fetch(PDO::FETCH_ASSOC))
+            return true;
+        else
+            return false;
+    }
+
+    public function addUser($login, $pass) {
+        $query = $this->pdo->prepare(
+            'INSERT INTO users (login, pass) VALUES (:login, :pass)'
+        );
+        $query->bindValue(':login', $login, PDO::PARAM_STR);
+        $query->bindValue(':pass', $pass, PDO::PARAM_STR);
+        if ($query->execute())
+            return true;
+        else
+            return false;
+    }
 }

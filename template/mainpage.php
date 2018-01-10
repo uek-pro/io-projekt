@@ -10,7 +10,7 @@
     <h1>IOProject - Menadżer pracowników</h1>
 </div>
 
-<form method="post" action="">
+<form method="post" action="index.php?a=logon">
 
     <h2>Zaloguj się</h2>
 
@@ -23,12 +23,17 @@
         Hasło:
         <input name="password" type="password" />
     </label>
+
+    <?php if (isset($_SESSION['logon_bad_attempt'])) {
+        echo '<p>Błędny login lub hasło</p>';
+        unset($_SESSION['logon_bad_attempt']);
+    } ?>
     
     <input type="submit" value="Zaloguj" />
 
 </form>
 
-<form method="post" action="">
+<form method="post" action="index.php?a=register">
 
     <h2>Nowe konto</h2>
 
@@ -46,6 +51,11 @@
         Powtórz hasło:
         <input name="password-repeat-register" type="password" />
     </label>
+
+    <?php if (isset($_SESSION['register_attempt'])) {
+        echo '<p>' . $_SESSION['register_attempt'] . '</p>';
+        unset($_SESSION['register_attempt']);
+    } ?>
     
     <input type="submit" value="Zarejestruj" />
 

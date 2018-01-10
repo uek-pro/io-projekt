@@ -14,13 +14,17 @@
 
     <h2>Zaloguj się</h2>
 
-    <label for="login">Login:</label>
-    <input id="login" type="text" value="" />
+    <label>
+        Login:
+        <input name="login" type="text" />
+    </label>
 
-    <label for="password">Hasło:</label>
-    <input id="password" type="password" value="" />
-
-    <input id="logon" type="submit" value="Zaloguj" />
+    <label>
+        Hasło:
+        <input name="password" type="password" />
+    </label>
+    
+    <input type="submit" value="Zaloguj" />
 
 </form>
 
@@ -28,15 +32,21 @@
 
     <h2>Nowe konto</h2>
 
-    <label for="login-register">Login:</label>
-    <input id="login-register" type="text" value="" />
-
-    <label for="password-register">Hasło:</label>
-    <input id="password-register" type="password" value="" />
-
-    <label for="password-repeat-register">Powtórz hasło:</label>
-    <input id="password-repeat-register" type="password" value="" />
-
-    <input id="register" type="submit" value="Zarejestruj" />
+    <label>
+        Login:
+        <input name="login-register" type="text" />
+    </label>
+    
+    <label>
+        Hasło:
+        <input name="password-register" type="password" />
+    </label>
+    
+    <label>
+        Powtórz hasło:
+        <input name="password-repeat-register" type="password" />
+    </label>
+    
+    <input type="submit" value="Zarejestruj" />
 
 </form>

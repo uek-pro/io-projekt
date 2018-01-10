@@ -7,6 +7,7 @@
     <title>io-projekt</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&amp;subset=latin-ext">
+    <link rel="stylesheet" href="template\style.css">
 </head>
 <body>
     

@@ -9,4 +9,6 @@ interface IConnection {
     public function checkLogonData($login, $pass);
     public function isUserExists($login);
     public function addUser($login, $pass);
+    public function addEmployee($userId, $employee);
+    public function getUsersEmployees($userId);
 }

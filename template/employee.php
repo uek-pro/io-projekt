@@ -1,6 +1,6 @@
 <h1>IOProject - Menadżer pracowników</h1>
 
-<form method="post" action="">
+<form method="post" action="index.php?a=add-employee">
 
     <h2>Dodaj / Edytuj pracownika</h2>
 
@@ -49,5 +49,6 @@
     </label>
 
     <input type="submit" value="Dodaj / Edytuj" />
+    <a href="index.php">Powrót</a>
 
 </form>

@@ -1,3 +1,13 @@
+<?php 
+
+use IOProject\Database\SQLiteConnection;
+use IOProject\View;
+
+$database = SQLiteConnection::prepareDatabase();
+$employees = $database->getUsersEmployees($_SESSION['logged_id']);
+
+?>
+
 <div class="header">
     <div class="logo">
         <a href="">
@@ -13,35 +23,13 @@
 
 <div class="main">
 
-    <h2>Lista pracowników <span>(Aktualnie zatrudnionych 4)</span></h2>
+    <h2>Lista pracowników<?= View::generateCurrentEmployeesCount($employees) ?></h2>
 
-    <input type="button" value="Dodaj nowego pracownika" />
+    <a class="button" href="index.php?a=add-employee">Zatrudnij nowego pracownika</a>
 
-    <div class="employees-list">
-        <div class="employee-item">
-            <div class="rectangle green"><div>
-            <p>Daniel Orzeł</p>
-            <p>6600 zł</p>
-        </div>
+    <?= View::generateEmployeesList($employees) ?>
 
-        <div class="employee-item">
-            <div class="rectangle blue"><div>
-            <p>Edward Jaszczomb</p>
-            <p>900 zł</p>
-        </div>
-
-        <div class="employee-item">
-            <div class="rectangle green"><div>
-            <p>Marta Kot</p>
-            <p>5800 zł</p>
-        </div>
-
-        <div class="employee-item">
-            <div class="rectangle purple"><div>
-            <p>Joanna Gęś</p>
-            <p>2277 zł</p>
-        </div>
-    </div>
+    <?= View::generateTotalEmployeesCost($employees); ?>
 
 </div>
 
@@ -49,8 +37,8 @@
 
     <h2>Szczegóły o pracowniku</h2>
 
-    <input type="button" value="Edytuj pracownika" />
-    <input type="button" value="Zwolnij pracownika" />
+    <a class="button" href="index.php?a=edit-employee&id=1">Edytuj pracownika</a>
+    <a class="button" href="index.php?a=del-employee&id=1">Zwolnij pracownika</a>
 
     <dl>
         <dt>Wynagrodzenie netto</dt><dd>5020 zł</dd>
@@ -60,3 +48,5 @@
     <dl>
 
 </div>
+
+<script src="template\show-details.js"></script>

@@ -11,7 +11,15 @@ class IOProjectApi {
             return 2;
         } else if ($event == 'register') {
             return 3;
-        } 
+        } else if ($event == 'add-employee') {
+            return 4;
+        } else if ($event == 'edit-employee') {
+            return 5;
+        } else if ($event == 'del-employee') {
+            return 6;
+        } else if ($event == 'show-details') {
+            return 7;
+        }
         return 0;
     }
 }

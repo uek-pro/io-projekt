@@ -18,7 +18,7 @@ for (let i = 0, k = employeesElements.length; i < k; i++) {
             detailsElement.innerHTML = (
                 '<h2>Szczegóły o pracowniku</h2>' +
                 '<a class="button" href="index.php?a=edit-employee&id=' + employeeId + '">Edytuj pracownika</a>' +
-                '<a class="button" href="index.php?a=del-employee&id=' + employeeId + '">Zwolnij pracownika</a>'
+                '<a class="button red" href="index.php?a=del-employee&id=' + employeeId + '">Zwolnij pracownika</a>'
             );
 
             getDetailsAsync(employeeId);

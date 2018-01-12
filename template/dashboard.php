@@ -9,31 +9,37 @@ $employees = $database->getUsersEmployees($_SESSION['logged_id']);
 
 ?>
 
-<div class="header">
-    <div class="logo">
-        <a href="">
-            <object class="logo" type="image/svg+xml" data="template/images/logo.svg">
-                Logo
-                <!-- fallback image in CSS -->
-            </object>
-        </a>
+<div class="container dashboard">
+
+    <div class="header">
+        <div class="logo">
+            <a href="">
+                <object class="logo" type="image/svg+xml" data="template/images/logo.svg">
+                    Logo
+                    <!-- fallback image in CSS -->
+                </object>
+            </a>
+        </div>
+        <div class="title">
+            <h1><?= Config::ApplicationTitle ?></h1>
+            <p>zalogowany jako: <span><?= $_SESSION['logged_user'] ?></span> | <a href="index.php?a=logout">wyloguj</a>
+        </div>
     </div>
-    <h1><?= Config::ApplicationTitle ?></h1>
-    <p>zalogowany jako: <span><?= $_SESSION['logged_user'] ?></span> | <a href="index.php?a=logout">wyloguj</a>
+
+    <div class="main">
+
+        <h2>Lista pracowników<?= View::generateCurrentEmployeesCount($employees) ?></h2>
+
+        <a class="button green" href="index.php?a=add-employee">Zatrudnij nowego pracownika</a>
+
+        <?= View::generateEmployeesList($employees) ?>
+
+        <?= View::generateTotalEmployeesCost($employees); ?>
+
+    </div>
+
+    <div id="details"></div>
+
 </div>
-
-<div class="main">
-
-    <h2>Lista pracowników<?= View::generateCurrentEmployeesCount($employees) ?></h2>
-
-    <a class="button" href="index.php?a=add-employee">Zatrudnij nowego pracownika</a>
-
-    <?= View::generateEmployeesList($employees) ?>
-
-    <?= View::generateTotalEmployeesCost($employees); ?>
-
-</div>
-
-<div id="details"></div>
 
 <script src="template\show-details.js"></script>

@@ -1,54 +1,65 @@
-<h1>IOProject - Menadżer pracowników</h1>
+<?php 
+
+use IOProject\Core\Config;
+use IOProject\Accountancy\Enums\ContractType;
+
+$change = isset($_SESSION['employee_changing']) ? true : false;
+
+?>
+
+<h1><?= Config::ApplicationTitle ?></h1>
 
 <form method="post" action="index.php?a=add-employee">
 
-    <h2>Dodaj / Edytuj pracownika</h2>
+    <h2><?= $change ? 'Edytuj' : 'Zatrudnij' ?> pracownika</h2>
+
+    <input name="id" type="hidden" value="<?= $change ? $_SESSION['employee_changing']->getId() : null ?>"/>
 
     <label>
         Imię:
-        <input name="forename" type="text" />
+        <input name="forename" type="text" value="<?= $change ? $_SESSION['employee_changing']->getForename() : null ?>" />
     </label>
     
     <label>
         Nazwisko:
-        <input name="surname" type="text" />
+        <input name="surname" type="text" value="<?= $change ? $_SESSION['employee_changing']->getSurname() : null ?>"/>
     </label>
 
     <label>
         PESEL:
-        <input name="pesel" type="number" />
+        <input name="pesel" type="number" value="<?= $change ? $_SESSION['employee_changing']->getPESEL() : null ?>"/>
     </label>
 
     <label>
         Numer konta:
-        <input name="account-number" type="number" />
+        <input name="account-number" type="number" value="<?= $change ? $_SESSION['employee_changing']->getAccountNumber() : null ?>"/>
     </label>
     
     <label>
         Rodzaj umowy:
         <select name="contract-type">
-            <option value="0">Umowa o pracę</option>
-            <option value="1">Umowa zlecenie</option>
-            <option value="2">Umowa o dzieło</option>
+            <option value="0"<?= $change && $_SESSION['employee_changing']->getContractType() == ContractType::EmploymentContract ? ' selected="selected"' : null ?>>Umowa o pracę</option>
+            <option value="1"<?= $change && $_SESSION['employee_changing']->getContractType() == ContractType::MandatoryContract ? ' selected="selected"' : null ?>>Umowa zlecenie</option>
+            <option value="2"<?= $change && $_SESSION['employee_changing']->getContractType() == ContractType::SpecificTaskContract ? ' selected="selected"' : null ?>>Umowa o dzieło</option>
         </select>
     </label>
 
     <label>
         Wynagrodzenie netto:
-        <input name="net-salary" type="number" />
+        <input name="net-salary" type="number" step="0.01" value="<?= $change ? $_SESSION['employee_changing']->getNetSalary() : null ?>"/>
     </label>
 
     <label>
         Wynagrodzenie brutto:
-        <input name="gross-salary" type="number" />
+        <input name="gross-salary" type="number" step="0.01" value="<?= $change ? $_SESSION['employee_changing']->getGrossSalary() : null ?>"/>
     </label>
 
     <label>
         Koszt pracownika:
-        <input name="cost-of-employer" type="number" />
+        <input name="cost-of-employer" type="number" step="0.01" value="<?= $change ? $_SESSION['employee_changing']->getCostOfEmployer() : null ?>"/>
     </label>
 
-    <input type="submit" value="Dodaj / Edytuj" />
+    <input type="submit" value="<?= $change ? 'Zapisz zmiany' : 'Zatrudnij' ?>" />
     <a href="index.php">Powrót</a>
 
 </form>

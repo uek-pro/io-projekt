@@ -1,3 +1,5 @@
+<?php use IOProject\Core\Config; ?>
+
 <div class="header">
     <div class="logo">
         <a href="">
@@ -7,7 +9,7 @@
             </object>
         </a>
     </div>
-    <h1>IOProject - Menadżer pracowników</h1>
+    <h1><?= Config::ApplicationTitle ?></h1>
 </div>
 
 <form method="post" action="index.php?a=logon">

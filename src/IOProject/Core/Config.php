@@ -2,6 +2,6 @@
 
 abstract class Config {
     
-    const Test = 'Przykładowy tekst';
+    const ApplicationTitle = 'Menadżer pracowników';
     const Currency = 'zł';
 }

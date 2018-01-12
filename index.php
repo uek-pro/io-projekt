@@ -67,6 +67,8 @@ if ($event == 1) {
 
     $database = SQLiteConnection::prepareDatabase();
 
+    $employeeId = filter_input(INPUT_POST, 'id');
+
     $employee = new Employee(
         filter_input(INPUT_POST, 'forename'),
         filter_input(INPUT_POST, 'surname'),
@@ -75,15 +77,29 @@ if ($event == 1) {
         filter_input(INPUT_POST, 'contract-type'),
         filter_input(INPUT_POST, 'net-salary'),
         filter_input(INPUT_POST, 'gross-salary'),
-        filter_input(INPUT_POST, 'cost-of-employer')
+        filter_input(INPUT_POST, 'cost-of-employer'),
+        $employeeId
     );
     // NOTE: nie ma pól wymaganych
-
-    $database->addEmployee($_SESSION['logged_id'], $employee);
+    if ($employeeId == null)
+        $database->addEmployee($_SESSION['logged_id'], $employee);
+    else 
+        $database->changeEmployee($employee);
 
     } else $_SESSION['employee_page'] = true;
 
 } else if ($event == 5) {
+
+    $employeeId = filter_input(INPUT_GET, 'id');
+    if ($employeeId != null) {
+        $database = SQLiteConnection::prepareDatabase();
+        $employee = $database->getEmployeeById($employeeId);
+        
+        if ($employee != null) {
+            $_SESSION['employee_page'] = true;
+            $_SESSION['employee_changing'] = $employee;
+        }
+    }
 
 } else if ($event == 6) {
 
@@ -102,6 +118,7 @@ if (isset($_SESSION['logged_id']))
     if (isset($_SESSION['employee_page'])) {
         unset($_SESSION['employee_page']);
         require_once __DIR__ . '/template/employee.php';
+        unset($_SESSION['employee_changing']);
     } else require_once __DIR__ . '/template/dashboard.php';
 else require_once __DIR__ . '/template/mainpage.php';
 

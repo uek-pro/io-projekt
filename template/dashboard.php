@@ -1,5 +1,6 @@
 <?php 
 
+use IOProject\Core\Config;
 use IOProject\Database\SQLiteConnection;
 use IOProject\View;
 
@@ -17,7 +18,7 @@ $employees = $database->getUsersEmployees($_SESSION['logged_id']);
             </object>
         </a>
     </div>
-    <h1>IOProject - Menadżer pracowników</h1>
+    <h1><?= Config::ApplicationTitle ?></h1>
     <p>zalogowany jako: <span><?= $_SESSION['logged_user'] ?></span> | <a href="index.php?a=logout">wyloguj</a>
 </div>
 

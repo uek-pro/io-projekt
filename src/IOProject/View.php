@@ -24,7 +24,7 @@ class View {
                 $contractTypeColor = 'purple';
             }
 
-            $content .= '<div class="employee-item" employeeId=' . $employees[$i]->getId() . '>' . '<div class="rectangle ' . $contractTypeColor . '"></div><p>' . $employees[$i]->getForename() . ' ' . $employees[$i]->getSurname() . '</p><p>' . $employees[$i]->getGrossSalary() . '</p><p>' . $employees[$i]->getCostOfEmployer() . '</p>' . '</div>';
+            $content .= '<div class="employee-item" employeeId=' . $employees[$i]->getId() . '>' . '<div class="rectangle ' . $contractTypeColor . '"></div><p>' . $employees[$i]->getForename() . ' ' . $employees[$i]->getSurname() . '</p><p>' . Common::changeCost($employees[$i]->getGrossSalary()) . '</p><p>' . Common::changeCost($employees[$i]->getCostOfEmployer()) . '</p>' . '</div>';
         }
 
         return ($content != '' ? '<div class="employees-list">' . $content . '</div>' : null);

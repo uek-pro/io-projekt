@@ -163,6 +163,34 @@ class SQLiteConnection implements IConnection {
             return null;
     }
 
+    public function changeEmployee($employee) {
+
+        $query = $this->pdo->prepare(
+            'UPDATE employees SET forename = :forename,
+            surname = :surname,
+            pesel = :pesel,
+            account_number = :account_number,
+            contract_type = :contract_type,
+            net_salary = :net_salary,
+            gross_salary = :gross_salary,
+            cost_of_employer = :cost_of_employer
+            WHERE employee_id = :employee_id'
+        );
+        $query->bindValue(':employee_id', $employee->getId(), PDO::PARAM_INT);
+        $query->bindValue(':forename', $employee->getForename(), PDO::PARAM_STR);
+        $query->bindValue(':surname', $employee->getSurname(), PDO::PARAM_STR);
+        $query->bindValue(':pesel', $employee->getPESEL(), PDO::PARAM_STR);
+        $query->bindValue(':account_number', $employee->getAccountNumber(), PDO::PARAM_STR);
+        $query->bindValue(':contract_type', $employee->getContractType(), PDO::PARAM_INT);
+        $query->bindValue(':net_salary', $employee->getNetSalary(), PDO::PARAM_STR);
+        $query->bindValue(':gross_salary', $employee->getGrossSalary(), PDO::PARAM_STR);
+        $query->bindValue(':cost_of_employer', $employee->getCostOfEmployer(), PDO::PARAM_STR);
+        if ($query->execute() && $query->rowCount() > 0)
+            return true;
+        else
+            return false;
+    }
+
     public function delEmployee($employeeId) {
 
         $query = $this->pdo->prepare(

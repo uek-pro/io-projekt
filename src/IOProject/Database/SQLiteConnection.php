@@ -162,4 +162,17 @@ class SQLiteConnection implements IConnection {
         else
             return null;
     }
+
+    public function delEmployee($employeeId) {
+
+        $query = $this->pdo->prepare(
+            'DELETE FROM employees WHERE employee_id = :id'
+        );
+        $query->bindValue(':id', $employeeId, PDO::PARAM_INT);
+        $query->execute();
+        if ($query->rowCount() > 0)
+            return true;
+        else
+            return false;
+    }
 }

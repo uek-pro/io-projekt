@@ -1,3 +1,5 @@
 body, input, select {color: #333;font-family: 'Roboto', Arial, sans-serif;}
+a {color:#6a84ca;}
 .employee-item{cursor: pointer;}
-.employee-item:hover{background-color: aquamarine;}
+.employee-item:hover{background-color: #f0e68c;}
+.selected{background-color: #8c96f0}

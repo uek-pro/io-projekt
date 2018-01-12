@@ -82,6 +82,16 @@ if ($event == 1) {
     $database->addEmployee($_SESSION['logged_id'], $employee);
 
     } else $_SESSION['employee_page'] = true;
+
+} else if ($event == 5) {
+
+} else if ($event == 6) {
+
+    $employeeId = filter_input(INPUT_GET, 'id');
+    if ($employeeId != null) {
+        $database = SQLiteConnection::prepareDatabase();
+        $database->delEmployee($employeeId);
+    }
 }
 
 ob_start();

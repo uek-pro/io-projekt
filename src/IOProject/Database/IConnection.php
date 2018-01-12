@@ -12,4 +12,5 @@ interface IConnection {
     public function addEmployee($userId, $employee);
     public function getUsersEmployees($userId);
     public function getEmployeeById($employeeId);
+    public function delEmployee($employeeId);
 }

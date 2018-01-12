@@ -112,7 +112,7 @@ class SQLiteConnection implements IConnection {
 
     public function getUsersEmployees($userId) {
         $query = $this->pdo->prepare(
-            'SELECT forename, surname, pesel, account_number, contract_type, net_salary, gross_salary, cost_of_employer
+            'SELECT employee_id, forename, surname, pesel, account_number, contract_type, net_salary, gross_salary, cost_of_employer
             FROM employees INNER JOIN users ON users.user_id = employees.user_id
             WHERE users.user_id = :user_id'
         );
@@ -131,12 +131,35 @@ class SQLiteConnection implements IConnection {
                     $row['contract_type'],
                     $row['net_salary'],
                     $row['gross_salary'],
-                    $row['cost_of_employer']
+                    $row['cost_of_employer'],
+                    $row['employee_id']
                 );
             }
             return $employees;
         }
         else
             return false; // NOTE: null będzie lepszy? count(false) == 1
+    }
+
+    public function getEmployeeById($employeeId) { // NOTE: brak zabezpieczenia hasłem
+        $query = $this->pdo->prepare(
+            'SELECT * FROM employees WHERE employee_id = :id LIMIT 1'
+        );
+        $query->bindValue(':id', $employeeId, PDO::PARAM_INT);
+        $query->execute();
+        if ($row = $query->fetch(PDO::FETCH_ASSOC))
+            return new Employee(
+                $row['forename'],
+                $row['surname'],
+                $row['pesel'],
+                $row['account_number'],
+                $row['contract_type'],
+                $row['net_salary'],
+                $row['gross_salary'],
+                $row['cost_of_employer'],
+                $row['employee_id']
+            );
+        else
+            return null;
     }
 }

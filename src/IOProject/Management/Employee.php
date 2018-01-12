@@ -1,7 +1,8 @@
 <?php namespace IOProject\Management;
 
-class Employee {
+class Employee implements \JsonSerializable {
 
+    private $id;
     private $forename;
     private $surname;
     private $PESEL;
@@ -11,7 +12,8 @@ class Employee {
 	private $grossSalary;
 	private $costOfEmployer;
 
-    public function __construct($forename, $surname, $pesel, $accountNumber, $contractType, $netSalary, $grossSalary, $costOfEmployer) {
+    public function __construct($forename, $surname, $pesel, $accountNumber, $contractType, $netSalary, $grossSalary, $costOfEmployer, $id = -1) {
+        $this->id = $id;
         $this->forename = $forename;
         $this->surname = $surname;
         $this->PESEL = $pesel;
@@ -20,6 +22,10 @@ class Employee {
         $this->netSalary = $netSalary;
         $this->grossSalary = $grossSalary;
         $this->costOfEmployer = $costOfEmployer;
+    }
+
+    public function getId() {
+        return $this->id;
     }
 
     public function getForename() {
@@ -52,5 +58,19 @@ class Employee {
 
     public function getCostOfEmployer() {
         return $this->costOfEmployer;
+    }
+
+    public function jsonSerialize() {
+        return [
+            'id' => $this->id,
+            'forename' => $this->forename,
+            'surname' => $this->surname,
+            'PESEL' => $this->PESEL,
+            'accountNumber' => $this->accountNumber,
+            'contractType' => $this->contractType,
+            'netSalary' => $this->netSalary,
+            'grossSalary' => $this->grossSalary,
+            'costOfEmployer' => $this->costOfEmployer
+        ];
     }
 }

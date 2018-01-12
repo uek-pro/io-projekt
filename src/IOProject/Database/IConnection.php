@@ -11,4 +11,5 @@ interface IConnection {
     public function addUser($login, $pass);
     public function addEmployee($userId, $employee);
     public function getUsersEmployees($userId);
+    public function getEmployeeById($employeeId);
 }

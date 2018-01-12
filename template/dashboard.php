@@ -33,20 +33,6 @@ $employees = $database->getUsersEmployees($_SESSION['logged_id']);
 
 </div>
 
-<div class="details">
-
-    <h2>Szczegóły o pracowniku</h2>
-
-    <a class="button" href="index.php?a=edit-employee&id=1">Edytuj pracownika</a>
-    <a class="button" href="index.php?a=del-employee&id=1">Zwolnij pracownika</a>
-
-    <dl>
-        <dt>Wynagrodzenie netto</dt><dd>5020 zł</dd>
-        <dt>Wynagrodzenie brutto</dt><dd>5800 zł</dd>
-        <dt>Koszt pracownika</dt><dd>6600 zł</dd>
-        <dt>...</dt><dd>...</dd>
-    <dl>
-
-</div>
+<div id="details"></div>
 
 <script src="template\show-details.js"></script>

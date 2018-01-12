@@ -42,4 +42,5 @@ $employees = $database->getUsersEmployees($_SESSION['logged_id']);
 
 </div>
 
+<script>const consts = <?= json_encode(array('currency' => Config::Currency)) ?></script>
 <script src="template\show-details.js"></script>

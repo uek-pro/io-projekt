@@ -7,32 +7,33 @@ class View {
 
     public static function generateEmployeesList($employees) {
         
-        if (!$employees || count($employees) == 0) return null;
+        if (count($employees) == 0) return null;
+
+        $headers = '<div class="employee-header"><p>Imię i nazwisko <span class="contract-type">Typ umowy</span></p><p>Wynagrodzenie brutto (Koszt pracownika)</p></div>';
 
         $content = '';
 
         for ($i = 0; $i < count($employees); $i++) {
 
-            $contractTypeColor = 'black';
-            
+            $contractTypeShortcut = 'NA';
             $contractType = $employees[$i]->getContractType();
             if ($contractType == ContractType::EmploymentContract) {
-                $contractTypeColor = 'green';
+                $contractTypeShortcut = 'UP';
             } else if ($contractType == ContractType::MandatoryContract) {
-                $contractTypeColor = 'blue';
+                $contractTypeShortcut = 'UZ';
             } else if ($contractType == ContractType::SpecificTaskContract) {
-                $contractTypeColor = 'purple';
+                $contractTypeShortcut = 'UD';
             }
 
-            $content .= '<div class="employee-item" employeeId=' . $employees[$i]->getId() . '>' . '<div class="rectangle ' . $contractTypeColor . '"></div><p>' . $employees[$i]->getForename() . ' ' . $employees[$i]->getSurname() . '</p><p>' . Common::changeCost($employees[$i]->getGrossSalary()) . '</p><p>' . Common::changeCost($employees[$i]->getCostOfEmployer()) . '</p>' . '</div>';
+            $content .= '<div class="employee-item" employeeId=' . $employees[$i]->getId() . '><p>' . $employees[$i]->getForename() . ' ' . $employees[$i]->getSurname() . ' <span class="contract-type">' . $contractTypeShortcut . '</span></p><p>' . Common::changeCost($employees[$i]->getGrossSalary()) . ' (' . Common::changeCost($employees[$i]->getCostOfEmployer()) . ')</p>' . '</div>';
         }
 
-        return ($content != '' ? '<div class="employees-list">' . $content . '</div>' : null);
+        return ($content != '' ? '<div class="employees-list">' . $headers . $content . '</div>' : null);
     }
 
     public static function generateTotalEmployeesCost($employees) {
 
-        if (!$employees || count($employees) == 0) return null;
+        if (count($employees) == 0) return null;
 
         $cost = 0;
         for ($i = 0, $c = count($employees); $i < $c; $i++) {
@@ -44,7 +45,7 @@ class View {
 
     public static function generateCurrentEmployeesCount($employees) {
 
-        if (!$employees || count($employees) == 0) return null;
+        if (count($employees) == 0) return null;
 
         return (count($employees) != 0 ? ' <span>(Aktualnie zatrudnionych ' . count($employees) . ')</span>' : null);
     }

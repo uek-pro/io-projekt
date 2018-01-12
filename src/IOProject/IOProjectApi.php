@@ -17,8 +17,6 @@ class IOProjectApi {
             return 5;
         } else if ($event == 'del-employee') {
             return 6;
-        } else if ($event == 'show-details') {
-            return 7;
         }
         return 0;
     }

@@ -16,7 +16,7 @@ for (let i = 0, k = employeesElements.length; i < k; i++) {
             selection.select(employeesElements[i]);
 
             detailsElement.innerHTML = (
-                '<h2>Szczegóły o pracowniku</h2>' +
+                '<h2>Szczegóły</h2>' +
                 '<a class="button" href="index.php?a=edit-employee&id=' + employeeId + '">Edytuj pracownika</a>' +
                 '<a class="button red" href="index.php?a=del-employee&id=' + employeeId + '">Zwolnij pracownika</a>'
             );
@@ -40,12 +40,26 @@ const getDetailsAsync = function (employeeId) {
         console.log(employeeId, result);
         if (result.success) {
 
+            let contractTypeContent = 'N/A';
+            const contractType = result.employee.contractType;
+            if (contractType == 0) {
+                contractTypeContent = 'Umowa o pracę';
+            } else if (contractType == 1) {
+                contractTypeContent = 'Umowa zlecenie';
+            } else if (contractType == 2) {
+                contractTypeContent = 'Umowa o dzieło';
+            }
+
             detailsElement.innerHTML += (
                 '<dl>' +
                 '<dt>Imię</dt><dd>' + result.employee.forename +'</dd>' +
                 '<dt>Nazwisko</dt><dd>' + result.employee.surname + '</dd>' +
-                '<dt>Id (tmp)</dt><dd>' + result.employee.id + '</dd>' +
-                '<dt>...</dt><dd>...</dd>' +
+                '<dt>PESEL</dt><dd>' + result.employee.PESEL + '</dd>' +
+                '<dt>Nr konta</dt><dd>' + result.employee.accountNumber + '</dd>' +
+                '<dt>Typ umowy</dt><dd>' + contractTypeContent + '</dd>' +
+                '<dt>Wynagrodzenie netto</dt><dd>' + Number(result.employee.netSalary).toFixed(2) + ' ' + consts.currency + '</dd>' +
+                '<dt>Wynagrodzenie brutto</dt><dd>' + Number(result.employee.grossSalary).toFixed(2) + ' ' + consts.currency + '</dd>' +
+                '<dt>Koszt pracownika</dt><dd>' + Number(result.employee.costOfEmployer).toFixed(2) + ' ' + consts.currency + '</dd>' +
                 '<dl>'
             );
             

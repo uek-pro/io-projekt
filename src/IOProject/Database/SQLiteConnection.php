@@ -1,11 +1,12 @@
 <?php namespace IOProject\Database;
 
 use \PDO;
+use IOProject\Core\Config;
 use IOProject\Management\Employee;
 
 class SQLiteConnection implements IConnection {
 
-    const DATABASE_NAME = "database_name.sqlite";
+    const DATABASE_NAME = Config::DatabaseName;
     private $pdo;
 
     public static function prepareDatabase() {
@@ -138,7 +139,7 @@ class SQLiteConnection implements IConnection {
             return $employees;
         }
         else
-            return false; // NOTE: null będzie lepszy? count(false) == 1
+            return null;
     }
 
     public function getEmployeeById($employeeId) { // NOTE: brak zabezpieczenia hasłem

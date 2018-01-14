@@ -40,7 +40,7 @@ class View {
             $cost += $employees[$i]->getCostOfEmployer();
         }
 
-        return '<div class="summary"><p>Całkowity koszt pracowników</p><p>' . Common::changeCost($cost) . '</p></div>';
+        return '<div class="summary"><p>Całkowity koszt pracowników</p><p class="cost">' . Common::changeCost($cost) . '</p></div>';
     }
 
     public static function generateCurrentEmployeesCount($employees) {

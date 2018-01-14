@@ -17,12 +17,12 @@ $change = isset($_SESSION['employee_changing']) ? true : false;
         <input name="id" type="hidden" value="<?= $change ? $_SESSION['employee_changing']->getId() : null ?>"/>
 
         <label>
-            Imię:
+            Imię <span class="required">(wymagane)</span>:
             <input name="forename" type="text" value="<?= $change ? $_SESSION['employee_changing']->getForename() : null ?>" />
         </label>
         
         <label>
-            Nazwisko:
+            Nazwisko <span class="required">(wymagane)</span>:
             <input name="surname" type="text" value="<?= $change ? $_SESSION['employee_changing']->getSurname() : null ?>"/>
         </label>
 
@@ -37,7 +37,7 @@ $change = isset($_SESSION['employee_changing']) ? true : false;
         </label>
         
         <label>
-            Rodzaj umowy:
+            Rodzaj umowy <span class="required">(wymagane)</span>:
             <select name="contract-type">
                 <option value="0"<?= $change && $_SESSION['employee_changing']->getContractType() == ContractType::EmploymentContract ? ' selected="selected"' : null ?>>Umowa o pracę</option>
                 <option value="1"<?= $change && $_SESSION['employee_changing']->getContractType() == ContractType::MandatoryContract ? ' selected="selected"' : null ?>>Umowa zlecenie</option>
@@ -47,18 +47,23 @@ $change = isset($_SESSION['employee_changing']) ? true : false;
 
         <label>
             Wynagrodzenie netto:
-            <input name="net-salary" type="number" step="0.01" value="<?= $change ? $_SESSION['employee_changing']->getNetSalary() : null ?>"/>
+            <input name="net-salary" type="number" step="0.01" value="<?= $change ? $_SESSION['employee_changing']->getNetSalary() : null ?>" disabled/>
         </label>
 
         <label>
-            Wynagrodzenie brutto:
+            Wynagrodzenie brutto <span class="required">(wymagane)</span>:
             <input name="gross-salary" type="number" step="0.01" value="<?= $change ? $_SESSION['employee_changing']->getGrossSalary() : null ?>"/>
         </label>
 
         <label>
             Koszt pracownika:
-            <input name="cost-of-employer" type="number" step="0.01" value="<?= $change ? $_SESSION['employee_changing']->getCostOfEmployer() : null ?>"/>
+            <input name="cost-of-employer" type="number" step="0.01" value="<?= $change ? $_SESSION['employee_changing']->getCostOfEmployer() : null ?>" disabled/>
         </label>
+
+        <?php if (isset($_SESSION['employee_add_attempt'])) {
+            echo '<span class="info">Należy uzupełnić wszystkie wymagane pola formularza</span>';
+            unset($_SESSION['employee_add_attempt']);
+        } ?>
 
         <input type="submit" value="<?= $change ? 'Zapisz zmiany' : 'Zatrudnij' ?>" />
         <a class="button" href="index.php">Powrót</a>

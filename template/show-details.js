@@ -1,4 +1,4 @@
-console.log('>', 'show-details.js loaded :)');
+console.log('*', 'show-details.js loaded :)');
 
 const detailsElement = document.querySelector('#details');
 
@@ -57,10 +57,27 @@ const getDetailsAsync = function (employeeId) {
                 '<dt>PESEL</dt><dd>' + result.employee.PESEL + '</dd>' +
                 '<dt>Nr konta</dt><dd>' + result.employee.accountNumber + '</dd>' +
                 '<dt>Typ umowy</dt><dd>' + contractTypeContent + '</dd>' +
-                '<dt>Wynagrodzenie netto</dt><dd>' + Number(result.employee.netSalary).toFixed(2) + ' ' + consts.currency + '</dd>' +
-                '<dt>Wynagrodzenie brutto</dt><dd>' + Number(result.employee.grossSalary).toFixed(2) + ' ' + consts.currency + '</dd>' +
-                '<dt>Koszt pracownika</dt><dd>' + Number(result.employee.costOfEmployer).toFixed(2) + ' ' + consts.currency + '</dd>' +
-                '<dl>'
+                '</dl>' +
+                '<p>Całkowity koszt pracownika</p>' +
+                '<p class="cost">' + changeCost(result.calculation.costOfEmployer) + '</p>' +
+                '<dl>' +
+                '<dt>' + result.calculation.taxes['pension-insurance'].name + '</dt><dd>' + changeCost(result.calculation.taxes['pension-insurance'].outcome) +'</dd>' +
+                '<dt>' + result.calculation.taxes['disability-insurance'].name + '</dt><dd>' + changeCost(result.calculation.taxes['disability-insurance'].outcome) +'</dd>' +
+                '<dt>' + result.calculation.taxes['accident-insurance'].name + '</dt><dd>' + changeCost(result.calculation.taxes['accident-insurance'].outcome) +'</dd>' +
+                '<dt>' + result.calculation.taxes['labor-fund'].name + '</dt><dd>' + changeCost(result.calculation.taxes['labor-fund'].outcome) +'</dd>' +
+                '<dt>' + result.calculation.taxes['gebf'].name + '</dt><dd>' + changeCost(result.calculation.taxes['gebf'].outcome) +'</dd>' +
+                '</dl>' +
+                '<p>Wynagrodzenie brutto</p>' +
+                '<p class="cost">' + changeCost(result.calculation.grossSalary) + '</p>' +
+                '<dl>' +
+                '<dt>' + result.calculation.taxes['pension-contribution'].name + '</dt><dd>' + changeCost(result.calculation.taxes['pension-contribution'].outcome) +'</dd>' +
+                '<dt>' + result.calculation.taxes['disability-contribution'].name + '</dt><dd>' + changeCost(result.calculation.taxes['disability-contribution'].outcome) +'</dd>' +
+                '<dt>' + result.calculation.taxes['sickness-contribution'].name + '</dt><dd>' + changeCost(result.calculation.taxes['sickness-contribution'].outcome) +'</dd>' +
+                '<dt>' + result.calculation.taxes['health-insurance'].name + '</dt><dd>' + changeCost(result.calculation.taxes['health-insurance'].outcome) +'</dd>' +
+                '<dt>' + result.calculation.taxes['advance'].name + '</dt><dd>' + changeCost(result.calculation.taxes['advance'].outcome, 0) + '</dd>' +
+                '</dl>' +
+                '<p>Wynagrodzenie netto</p>' +
+                '<p class="cost">' + changeCost(result.calculation.netSalary) + '</p>' 
             );
             
         } else {
@@ -76,4 +93,8 @@ const selection = {
     unselect: function(handle) {
         handle.className == 'employee-item selected' ? handle.className = "employee-item" : null;
     }
+}
+
+function changeCost(amount, precision = 2) {
+    return Number(Math.round(amount * Math.pow(10, precision)) / Math.pow(10, precision)).toFixed(2) + ' ' + consts.currency;
 }

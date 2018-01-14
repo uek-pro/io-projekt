@@ -5,6 +5,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 use IOProject\IOProjectApi;
 use IOProject\Database\SQLiteConnection;
 use IOProject\Management\Employee;
+use IOProject\Accountancy\ContractTaxCalculationService;
 
 session_start();
 
@@ -34,7 +35,6 @@ if ($event == 1) {
         unset($_SESSION['logged_user']);
     }
         
-
 } else if ($event == 3) {
 
     $login = filter_input(INPUT_POST, 'login-register');
@@ -65,26 +65,42 @@ if ($event == 1) {
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $database = SQLiteConnection::prepareDatabase();
+        $database = SQLiteConnection::prepareDatabase();
 
-    $employeeId = filter_input(INPUT_POST, 'id');
+        $employeeId = filter_input(INPUT_POST, 'id');
 
-    $employee = new Employee(
-        filter_input(INPUT_POST, 'forename'),
-        filter_input(INPUT_POST, 'surname'),
-        filter_input(INPUT_POST, 'pesel'),
-        filter_input(INPUT_POST, 'account-number'),
-        filter_input(INPUT_POST, 'contract-type'),
-        filter_input(INPUT_POST, 'net-salary'),
-        filter_input(INPUT_POST, 'gross-salary'),
-        filter_input(INPUT_POST, 'cost-of-employer'),
-        $employeeId
-    );
-    // NOTE: nie ma pól wymaganych
-    if ($employeeId == null)
-        $database->addEmployee($_SESSION['logged_id'], $employee);
-    else 
-        $database->changeEmployee($employee);
+        $forename = filter_input(INPUT_POST, 'forename');
+        $surname = filter_input(INPUT_POST, 'surname');
+        $grossSalary = filter_input(INPUT_POST, 'gross-salary');
+        $contractType = filter_input(INPUT_POST, 'contract-type');
+
+        if (!empty($forename) && !empty($surname) && !empty($grossSalary)) {
+
+            $taxCalculation = new ContractTaxCalculationService();
+            $result = $taxCalculation->calculateAll($grossSalary, $contractType);
+
+            $employee = new Employee(
+                $forename,
+                $surname,
+                filter_input(INPUT_POST, 'pesel'),
+                filter_input(INPUT_POST, 'account-number'),
+                $contractType,
+                round($result->getNetSalary(), 2),
+                $grossSalary,
+                round($result->getCostOfEmployer(), 2),
+                $employeeId
+            );
+
+            if ($employeeId == null)
+                $database->addEmployee($_SESSION['logged_id'], $employee);
+            else 
+                $database->changeEmployee($employee);
+        } else {
+            if ($employeeId == null) {
+                $_SESSION['employee_add_attempt'] = true;
+                $_SESSION['employee_page'] = true;
+            }
+        }
 
     } else $_SESSION['employee_page'] = true;
 

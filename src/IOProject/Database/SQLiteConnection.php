@@ -115,7 +115,7 @@ class SQLiteConnection implements IConnection {
         $query = $this->pdo->prepare(
             'SELECT employee_id, forename, surname, pesel, account_number, contract_type, net_salary, gross_salary, cost_of_employer
             FROM employees INNER JOIN users ON users.user_id = employees.user_id
-            WHERE users.user_id = :user_id'
+            WHERE users.user_id = :user_id ORDER BY surname ASC'
         );
         $query->bindValue(':user_id', $userId, PDO::PARAM_INT);
         $query->execute();

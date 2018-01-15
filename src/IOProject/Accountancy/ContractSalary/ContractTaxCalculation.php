@@ -13,7 +13,21 @@ abstract class ContractTaxCalculation implements \JsonSerializable {
     protected $aTax = array();
 
     protected function __construct() {
-        $this->aTax['income-tax'] = new Tax(18, TaxValueType::Percentile, 'Podatek dochodowy');
+        // pracodawca
+        $this->aTax['pension-insurance'] = new Tax('Ubezpieczenie emerytalne', TaxValueType::Percentile);
+        $this->aTax['disability-insurance'] = new Tax('Ubezpieczenie rentowe', TaxValueType::Percentile);
+        $this->aTax['accident-insurance'] = new Tax('Ubezpieczenie wypadkowe', TaxValueType::Percentile);
+        $this->aTax['labor-fund'] = new Tax('Fundusz Pracy', TaxValueType::Percentile);
+        $this->aTax['gebf'] = new Tax('FGŚP', TaxValueType::Percentile); // Fundusz Gwarantowanych Świadczeń Pracowniczych
+        // pracownik
+        $this->aTax['pension-contribution'] = new Tax('Składka emerytalna', TaxValueType::Percentile, 9.76);
+        $this->aTax['disability-contribution'] = new Tax('Składka rentowa', TaxValueType::Percentile, 1.5);
+        $this->aTax['sickness-contribution'] = new Tax('Składka chorobowa', TaxValueType::Percentile, 2.45);
+        $this->aTax['health-insurance'] = new Tax('Ubezpieczenie zdrowotne', TaxValueType::Percentile, 9);
+        $this->aTax['health-insurance-deduction'] = new Tax('Odliczenie od ubezpieczenia zdrowotnego', TaxValueType::Percentile, 7.75);
+
+        $this->aTax['income-tax'] = new Tax('Podatek dochodowy', TaxValueType::Percentile, 18);
+        $this->aTax['advance'] = new Tax('Zaliczka do urzędu skarbowego', TaxValueType::Constant); 
     }
 
     abstract function calculateGrossToNet($grossSalary);

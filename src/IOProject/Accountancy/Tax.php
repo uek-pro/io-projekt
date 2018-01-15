@@ -10,20 +10,19 @@ class Tax implements \JsonSerializable {
     private $valueType;
     private $outcome;
 
-    // public function __construct($name, $valueType) {
-    //     $this->name = $name;
-    //     $this->valueType = $valueType;
-    // }
-
-    public function __construct($value, $valueType, $name, $outcome = 0) {
-        $this->value = $value;
-        $this->valueType = $valueType;
+    public function __construct($name, $valueType, $value = 0) {
         $this->name = $name;
-        $this->outcome = $outcome;
+        $this->valueType = $valueType;
+        $this->value = $value;
+        $this->outcome = $this->valueType == TaxValueType::Constant ? $this->value : 0;
     }
 
     public function getName() {
         return $this->name;
+    }
+
+    public function setValue($value) {
+        $this->value = $value;
     }
 
     public function getValue() {
@@ -32,6 +31,10 @@ class Tax implements \JsonSerializable {
 
     public function getValueType() {
         return $this->valueType;
+    }
+
+    public function setOutcome($outcome) {
+        $this->outcome = $outcome;
     }
 
     public function getOutcome() {

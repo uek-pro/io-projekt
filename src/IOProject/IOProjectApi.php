@@ -149,4 +149,32 @@ class IOProjectApi {
             $database->delEmployee($employeeId);
         }
     }
+
+    public function getEmployeesDetailsAsync() {
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
+            $employeeId = filter_input(INPUT_POST, 'employee-id');
+        
+            if ($employeeId && is_numeric($employeeId)) {
+                
+                $database = SQLiteConnection::prepareDatabase();
+                $employee = $database->getEmployeeById($employeeId);
+        
+                $taxCalculation = new ContractTaxCalculationService();
+                $result = $taxCalculation->calculateAll($employee->getGrossSalary(), $employee->getContractType());
+        
+                if ($employee != null) {
+                    $response['calculation'] = $result;
+                    $response['employee'] = $employee;
+                    $response['success'] = true;
+                } else {
+                    $response['success'] = false;
+                }
+                
+                return json_encode($response);
+            }
+        }
+        return null;
+    }
 }

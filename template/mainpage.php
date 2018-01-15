@@ -11,7 +11,7 @@
                 </object>
             </a>
         </div>
-        <h1><?= Config::ApplicationTitle ?></h1>
+        <h1><?= Config::APPLICATION_TITLE ?></h1>
     </div>
 
     <form method="post" action="index.php?a=logon">

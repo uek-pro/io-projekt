@@ -1,0 +1,27 @@
+@media screen and (max-width:1200px){
+
+    .container {width: 100%;}
+    .mainpage form {padding: 0 2.5%;width: 30%;}
+    .employee-page form label {width: 95%;}
+}
+
+
+@media screen and (max-width:1000px) {
+
+    .mainpage form {display: block;padding: 0 5%;width: 85%;}
+}
+
+@media screen and (max-width:768px) {
+    
+    .mainpage object.logo, .mainpage .logo {height: 180px;}
+    h1 {font-size: 1.6em;}
+    h2 {font-size: 1.25em;}
+} 
+
+@media screen and (max-width:480px) {
+
+}
+
+@media screen and (max-width:320px) {
+
+}

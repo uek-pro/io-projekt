@@ -21,7 +21,7 @@ $employees = $database->getUsersEmployees($_SESSION['logged_id']);
             </a>
         </div>
         <div class="title">
-            <h1><?= Config::ApplicationTitle ?></h1>
+            <h1><?= Config::APPLICATION_TITLE ?></h1>
             <p>zalogowany jako: <span><?= $_SESSION['logged_user'] ?></span> | <a href="index.php?a=logout">wyloguj</a>
         </div>
     </div>
@@ -42,5 +42,5 @@ $employees = $database->getUsersEmployees($_SESSION['logged_id']);
 
 </div>
 
-<script>const consts = <?= json_encode(array('currency' => Config::Currency)) ?></script>
+<script>const consts = <?= json_encode(array('currency' => Config::CURRENCY)) ?></script>
 <script src="template\show-details.js"></script>

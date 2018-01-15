@@ -6,7 +6,7 @@ use IOProject\Management\Employee;
 
 class SQLiteConnection implements IConnection {
 
-    const DATABASE_NAME = Config::DatabaseName;
+    const DATABASE_NAME = Config::DATABASE_NAME;
     private $pdo;
 
     public static function prepareDatabase() {

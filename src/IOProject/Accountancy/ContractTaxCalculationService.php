@@ -38,13 +38,13 @@ class ContractTaxCalculationService {
     private function getAlgorithmByContractType($contractType) {
 
         switch ($contractType) {
-            case ContractType::EmploymentContract:
+            case ContractType::EMPLOYMENT_CONTRACT:
                 $taxCalculation = new EmploymentContractTaxCalculation();
                 break;
-            case ContractType::MandatoryContract:
+            case ContractType::MANDATORY_CONTRACT:
                 $taxCalculation = new MandatoryContractTaxCalculation();
                 break;
-            case ContractType::SpecificTaskContract:
+            case ContractType::SPECIFIC_TASK_CONTRACT:
                 $taxCalculation = new SpecificTaskContractTaxCalculation();
                 break;
             default:

@@ -9,7 +9,7 @@ $change = isset($_SESSION['employee_changing']) ? true : false;
 
 <div class="container employee-page">
 
-    <h1><?= Config::ApplicationTitle ?></h1>
+    <h1><?= Config::APPLICATION_TITLE ?></h1>
     <h2><?= $change ? 'Edytuj' : 'Zatrudnij' ?> pracownika</h2>
 
     <form method="post" action="index.php?a=add-employee">
@@ -39,9 +39,9 @@ $change = isset($_SESSION['employee_changing']) ? true : false;
         <label>
             Rodzaj umowy <span class="required">(wymagane)</span>:
             <select name="contract-type">
-                <option value="0"<?= $change && $_SESSION['employee_changing']->getContractType() == ContractType::EmploymentContract ? ' selected="selected"' : null ?>>Umowa o pracę</option>
-                <option value="1"<?= $change && $_SESSION['employee_changing']->getContractType() == ContractType::MandatoryContract ? ' selected="selected"' : null ?>>Umowa zlecenie</option>
-                <option value="2"<?= $change && $_SESSION['employee_changing']->getContractType() == ContractType::SpecificTaskContract ? ' selected="selected"' : null ?>>Umowa o dzieło</option>
+                <option value="0"<?= $change && $_SESSION['employee_changing']->getContractType() == ContractType::EMPLOYMENT_CONTRACT ? ' selected="selected"' : null ?>>Umowa o pracę</option>
+                <option value="1"<?= $change && $_SESSION['employee_changing']->getContractType() == ContractType::MANDATORY_CONTRACT ? ' selected="selected"' : null ?>>Umowa zlecenie</option>
+                <option value="2"<?= $change && $_SESSION['employee_changing']->getContractType() == ContractType::SPECIFIC_TASK_CONTRACT ? ' selected="selected"' : null ?>>Umowa o dzieło</option>
             </select>
         </label>
 

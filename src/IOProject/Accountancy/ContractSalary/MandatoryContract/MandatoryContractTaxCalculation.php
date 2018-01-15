@@ -15,7 +15,7 @@ class MandatoryContractTaxCalculation extends \IOProject\Accountancy\ContractSal
         $this->aTax['labor-fund']->setValue(2.45);
         $this->aTax['gebf']->setValue(0.1);
 
-        $this->aTax['income-cost'] = new Tax('Koszt uzyskania przychodu', TaxValueType::Percentile, 20);
+        $this->aTax['income-cost'] = new Tax('Koszt uzyskania przychodu', TaxValueType::PERCENTILE, 20);
     }
 
     public function calculateGrossToNet($grossSalary) {

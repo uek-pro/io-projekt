@@ -2,7 +2,7 @@
 
 abstract class Config {
     
-    const ApplicationTitle = 'Menadżer pracowników';
-    const Currency = 'zł';
-    const DatabaseName = 'database_name.sqlite';
+    const APPLICATION_TITLE = 'Menadżer pracowników';
+    const CURRENCY = 'zł';
+    const DATABASE_NAME = 'database_name.sqlite';
 }

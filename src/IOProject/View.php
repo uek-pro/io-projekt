@@ -17,11 +17,11 @@ class View {
 
             $contractTypeShortcut = 'NA';
             $contractType = $employees[$i]->getContractType();
-            if ($contractType == ContractType::EmploymentContract) {
+            if ($contractType == ContractType::EMPLOYMENT_CONTRACT) {
                 $contractTypeShortcut = 'UP';
-            } else if ($contractType == ContractType::MandatoryContract) {
+            } else if ($contractType == ContractType::MANDATORY_CONTRACT) {
                 $contractTypeShortcut = 'UZ';
-            } else if ($contractType == ContractType::SpecificTaskContract) {
+            } else if ($contractType == ContractType::SPECIFIC_TASK_CONTRACT) {
                 $contractTypeShortcut = 'UD';
             }
 

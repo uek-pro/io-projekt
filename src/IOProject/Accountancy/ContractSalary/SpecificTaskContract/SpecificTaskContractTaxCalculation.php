@@ -8,7 +8,7 @@ class SpecificTaskContractTaxCalculation extends \IOProject\Accountancy\Contract
 
     public function __construct() {
         parent::__construct();
-        $this->aTax['income-cost'] = new Tax('Koszt uzyskania przychodu', TaxValueType::Percentile, 50);
+        $this->aTax['income-cost'] = new Tax('Koszt uzyskania przychodu', TaxValueType::PERCENTILE, 50);
     }
     
     public function calculateGrossToNet($grossSalary) {

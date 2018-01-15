@@ -2,6 +2,6 @@
 
 abstract class TaxValueType {
     
-    const Constant = 0;
-    const Percentile = 1;
+    const CONSTANT = 0;
+    const PERCENTILE = 1;
 }

@@ -3,7 +3,7 @@
 abstract class Common {
     
     public static function changeCost($cost) {
-        return round($cost, 2) . ' ' . Config::Currency; // format 0000.00 Currency
+        return round($cost, 2) . ' ' . Config::CURRENCY; // format 0000.00 CURRENCY
     }
 
     public static function calculatePercentage($amount, $percent) {

@@ -14,7 +14,7 @@ class Tax implements \JsonSerializable {
         $this->name = $name;
         $this->valueType = $valueType;
         $this->value = $value;
-        $this->outcome = $this->valueType == TaxValueType::Constant ? $this->value : 0;
+        $this->outcome = $this->valueType == TaxValueType::CONSTANT ? $this->value : 0;
     }
 
     public function getName() {
@@ -42,9 +42,9 @@ class Tax implements \JsonSerializable {
     }
 
     public function cal($amount = 0) {
-        if ($this->valueType == TaxValueType::Constant)
+        if ($this->valueType == TaxValueType::CONSTANT)
             return $this->outcome = $this->value;
-        else if ($this->valueType == TaxValueType::Percentile)
+        else if ($this->valueType == TaxValueType::PERCENTILE)
             return $this->outcome = Common::calculatePercentage($amount, $this->value);
         return null;
     }

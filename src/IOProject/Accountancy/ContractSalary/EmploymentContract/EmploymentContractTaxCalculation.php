@@ -15,8 +15,8 @@ class EmploymentContractTaxCalculation extends \IOProject\Accountancy\ContractSa
         $this->aTax['labor-fund']->setValue(2.45);
         $this->aTax['gebf']->setValue(0.1);
 
-        $this->aTax['income-cost'] = new Tax('Koszt uzyskania przychodu', TaxValueType::Constant, 111.25);
-        $this->aTax['tax-relief'] = new Tax('Ulga podatkowa', TaxValueType::Constant, 46.33);
+        $this->aTax['income-cost'] = new Tax('Koszt uzyskania przychodu', TaxValueType::CONSTANT, 111.25);
+        $this->aTax['tax-relief'] = new Tax('Ulga podatkowa', TaxValueType::CONSTANT, 46.33);
     }
 
     public function calculateGrossToNet($grossSalary) {
@@ -55,5 +55,3 @@ class EmploymentContractTaxCalculation extends \IOProject\Accountancy\ContractSa
         $this->costOfEmployer = $this->grossSalary + $this->aTax['pension-insurance']->getOutcome() + $this->aTax['disability-insurance']->getOutcome() + $this->aTax['accident-insurance']->getOutcome() + $this->aTax['labor-fund']->getOutcome() + $this->aTax['gebf']->getOutcome();
     }
 }
-
-// 20,61%

@@ -2,7 +2,7 @@
 
 abstract class ContractType {
     
-    const EmploymentContract = 0;   // umowa o pracę
-    const MandatoryContract = 1;    // umowa zlecenie
-    const SpecificTaskContract = 2; // umowa o dzieło
+    const EMPLOYMENT_CONTRACT = 0;   // umowa o pracę
+    const MANDATORY_CONTRACT = 1;    // umowa zlecenie
+    const SPECIFIC_TASK_CONTRACT = 2; // umowa o dzieło
 }

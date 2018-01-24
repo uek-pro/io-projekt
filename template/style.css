@@ -1,1 +1,54 @@
 body, input, select {color: #333;font-family: 'Roboto', Arial, sans-serif;}
+a {color:#6a84ca;text-decoration: none;cursor:pointer;}
+a:hover {text-decoration:underline;}
+p, h1, h2 {margin: 0;}
+h1, h2 {font-weight: 300;text-transform: uppercase;}
+
+.container {width: 1200px;margin: 0 auto;padding: 0 2.5%}
+.header {margin: 40px 0}
+
+.container.mainpage {text-align: center;}
+.mainpage .logo {display: block;height: 240px;margin: 20px auto;}
+.mainpage object.logo {height: 240px}
+.mainpage form {vertical-align: top;display: inline-block;padding: 0 5%;width: 30%;}
+.mainpage h2{padding: 20px;}
+
+.dashboard .logo {display: inline-block;width: 140px;vertical-align: middle;}
+.dashboard object.logo {width: 140px}
+.dashboard .title {display: inline-block;vertical-align: middle;margin-left: 12px;}
+.dashboard .title p span {font-weight: bold;}
+.dashboard .main {width: 60%;padding-right: 1.5%;float: left;clear: left;}
+.dashboard #details {width: 37%;padding-left: 1.5%;float: right;clear: right;}
+.dashboard .main h2 span {text-transform: initial;}
+.dashboard .summary {padding: 10px;text-align: right;text-transform: uppercase;}
+
+.dashboard p.cost {font-size:1.3em;}
+#details p {text-align: center;text-transform: uppercase;}
+
+.employee-header{padding:10px;font-size: 1.15em;font-weight: bold;}
+.employee-item{cursor: pointer;padding:10px;font-size: 1.15em;}
+.employee-item:hover{background-color: #f0e68c;color:#000}
+.selected{background-color: #8c96f0;color:#fff}
+.contract-type {font-size:0.7em;}
+.employees-list p {display: inline-block;}
+.employees-list p:last-child {float: right;clear: right;}
+
+.container.employee-page {margin-top:40px;}
+.employee-page .required {font-size: 0.8em;vertical-align: top;color: red;}
+
+form label {padding: 10px 0 0;display: block;font-weight: 300;text-align: left;}
+form input[type=text], form input[type=password], form input[type=number], form select {box-sizing: border-box;border:1px solid #6a84ca;padding: 7px;margin: 0px;width: 100%;height: 34px;}
+form input[type=submit] {width: 160px;height: 48px;border: 1px #6a84ca solid;background: #fff;font-weight: 600;cursor: pointer;font-size: 0.78em;text-transform: uppercase;margin: 36px 20px;}
+form input[type=submit]:hover {background: #6a84ca;color: #fff;}
+form span.info {margin: 20px 0;display: block;color: #dc143c;}
+
+a.button {color: #000;border: 1px #6a84ca solid;background: #fff;font-weight: 600;cursor: pointer;font-size: 0.78em;text-transform: uppercase;margin: 10px 10px 10px 0;padding: 12px 20px;display: inline-block;}
+a.button:hover {text-decoration:none;background: #6a84ca;color: #fff;}
+a.button.green {border-color:#507d2a;}
+a.button.green:hover {background: #507d2a;}
+a.button.red {border-color:#dc143c;}
+a.button.red:hover {background: #dc143c;}
+
+dl {display: grid;grid-template-columns: max-content auto;}
+dt {font-weight: 600;grid-column-start: 1;}
+dd {grid-column-start: 2;}
